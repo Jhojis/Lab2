@@ -1,4 +1,3 @@
-#include <iostream>
 #include <ctime>
 #include <cstdlib>
 #include <lab2header.h>
@@ -8,10 +7,9 @@ using namespace std;
 
 int main()
 {
+    int filas, columnas, numeroFila, numeroColumna;
     char cadena[100];
-    cout << "Introduce la cadena: ";
-    cin >> cadena;
-    cadenaYNumero(cadena);
+    matriz();
 
     return 0;
 }

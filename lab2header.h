@@ -7,3 +7,5 @@
 void arregloLetras();
 void convertirAMayusculas(char cadena[]);
 void cadenaYNumero(char cadena[]);
+void numeroRomano(char cadena[]);
+void matriz();
