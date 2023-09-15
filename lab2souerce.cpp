@@ -5,7 +5,16 @@
 
 using namespace std;
 
-
+int convertirCadenaAEntero(char cadena[])
+{
+    int numero = 0;
+    for (int i = 0; cadena[i] != '\0'; i++)
+    {
+        int valor = cadena[i] - '0';
+        numero = numero * 10 + valor;
+    }
+    return numero;
+}
 void arregloLetras()
 {
     srand(time(NULL));
@@ -36,7 +45,7 @@ void convertirAMayusculas(char cadena[]) {
 }
 void cadenaYNumero(char cadena[])
 {
-    char newCadena[100] = {};
+    char newCadena[100];
     int j;
     for (int i = 0; cadena[i] != '\0'; i++){
         if (!isdigit(cadena[i])){
@@ -164,4 +173,69 @@ void matriz(){
     if (esCuadradoMagic) cout << "Magiaaa" << endl;
     else cout << "No magiaaa" << endl;
 
+}
+int **dinamic_memory(int n)
+{
+    int **matrix = new int *[n];
+    for(int i=0; i<n; i++) matrix[i] = new int [n];
+
+    return matrix;
+}
+void generate_matrix(int **matrix, int n)
+{
+    for(int fil = 0; fil<n;fil++){
+        for(int col=0;col<n;col++) matrix[fil][col] = n*fil+(col+1);
+    }
+}
+void print_matrix(int **matrix, int n)
+{
+    for(int fil = 0; fil<n;fil++){
+        for(int col=0;col<n;col++) cout << matrix[fil][col]<< '\t';
+        cout << endl << endl;
+    }
+}
+void problema_14()
+{
+    int n, ***conj_matrix;
+    cout << "ingrese un numero: ";
+    cin >> n;
+    conj_matrix = dinamic_memory_P3(4,n);
+    generate_matrix(conj_matrix[0],n);
+    cout << "Matriz rotada 0 grados " << endl << endl;
+    print_matrix(conj_matrix[0],n);
+    for(int i=1;i<4;i++){
+        cout << "Matriz rotada "<< 90*(i) << " grados " << endl << endl;
+        rotate_90(conj_matrix[i-1],conj_matrix[i],n);
+        print_matrix(conj_matrix[i],n);
+    }
+    delete_P3(conj_matrix,n);
+}
+int ***dinamic_memory_P3(int n,int m)
+{
+    int ***conj_matrix = new int**[n];
+    for(int i=0; i<n; i++) conj_matrix[i] = dinamic_memory(m);
+
+    return conj_matrix;
+}
+void rotate_90(int **matrix, int**n_matrix, int n)
+{
+    for(int fil = 0; fil<n;fil++){
+        for(int col=0;col<n;col++) n_matrix[col][n-1-fil] = matrix[fil][col];
+    }
+}
+void delete_P2(int **matrix, int n)
+{
+    for(int i=0; i<n; i++) delete[] matrix[i];
+    delete[] matrix;
+}
+void delete_P3(int ***conj_matrix, int n)
+{
+    for(int i=0; i<4; i++) delete_P2(conj_matrix[i],n);
+    delete[] conj_matrix;
+}
+long long factorial(int n) {
+    if (n <= 1) {
+        return 1;
+    }
+    return n * factorial(n - 1);
 }
