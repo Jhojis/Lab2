@@ -1,26 +1,46 @@
 #include <iostream>
-#include <ctime>
-#include <cstdlib>
-#include <lab2header.h>
-#include <iostream>
+#include <fstream>
+#include <string>
 
 using namespace std;
 
+void create_file(string name);
+void write_file(string name, string info);
+string read_file(string name);
+
 int main()
 {
-    char cadena[100];
-    cout << "Introduce la cadena: ";
-    cin >> cadena;
-    int numero = convertirCadenaAEntero(cadena);
-    numero += 1;
-    cout << numero << endl;
-    //problema_14();
-    //int n;
-    //cout << "Ingrese el tamanio de la cuadricula (n): ";
-    //cin >> n;
-    //long long caminos = factorial(2 * n) / (factorial(n) * factorial(n));
-
-    //cout << "Para una malla de " << n << "x" << n << " puntos hay " << caminos << " caminos." << endl;
-
+    write_file("prueba.txt", "Hola mundo!");
+    cout << "Hello World!" << endl;
     return 0;
 }
+
+void create_file(string name)
+{
+    fstream file;
+    file.open(name, ios::out);
+    file.close();
+}
+void write_file(string name, string info)
+{
+    fstream file;
+    file.open(name, ios::out);
+    file << info;
+    file.close();
+}
+string read_file(string name)
+{
+    fstream file;
+    unsigned long long tam;
+    file.open(name, ios::in | ios::ate);
+    if (file.is_open()){
+        tam = file.tellg();
+        file.seekg(0);
+        for (unsigned long long i = 0; i < tam; i++){
+            //data.push_back(file.get());
+        }
+    }
+    file.close();
+}
+
+
